@@ -36,6 +36,26 @@ public: // サブクラス
 		XMMATRIX mat;	// ３Ｄ変換行列
 	};
 
+	//マテリアル
+	struct Material
+	{
+		std::string name;			 //マテリアル名
+		XMFLOAT3 ambient;			 //アンビエント影響度
+		XMFLOAT3 diffuse;			 //ディフューズ影響度
+		XMFLOAT3 specular;			 //スペキュラー影響度
+		float alpha;				 //アルファ
+		std::string textureFliename; //テクスチャファイル名
+
+		//コンストラクタ
+		Material() 
+		{
+			ambient = { 0.3f,0.3f,0.3f };
+			diffuse = { 0.0f,0.0f,0.0f };
+			specular = { 0.0f,0.0f,0.0f };
+			alpha = 1.0f;
+		}
+	};
+
 private: // 定数
 	static const int division = 50;					// 分割数
 	static const float radius;				// 底面の半径
@@ -132,6 +152,8 @@ private: // 静的メンバ変数
 	static XMFLOAT3 target;
 	// 上方向ベクトル
 	static XMFLOAT3 up;
+	// マテリアル
+	static Material material;
 	// 頂点バッファビュー
 	static D3D12_VERTEX_BUFFER_VIEW vbView;
 	// インデックスバッファビュー
