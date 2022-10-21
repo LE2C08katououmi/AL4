@@ -56,6 +56,24 @@ public: // サブクラス
 		}
 	};
 
+	//定数バッファ用データ構造体B0
+	struct ConstBufferDataB0
+	{
+		//XMFLOAT4 color 色(RGBA)
+		XMMATRIX mat; //3D変換行列
+	};
+
+	// 定数バッファ用データ構造体B1
+	struct ConstBufferDataB1
+	{
+		XMFLOAT3 ambient; //アンビエント係数
+		float pad1;		  //パディング
+		XMFLOAT3 diffuse; //ディフューズ係数
+		float pad2;		  //パディング
+		XMFLOAT3 specular;//スペキュラー係数
+		float alpha;	  //アルファ
+	};
+
 private: // 定数
 	static const int division = 50;					// 分割数
 	static const float radius;				// 底面の半径
@@ -224,7 +242,9 @@ public: // メンバ関数
 	void SetPosition(const XMFLOAT3& position) { this->position = position; }
 
 private: // メンバ変数
-	ComPtr<ID3D12Resource> constBuff; // 定数バッファ
+	//ComPtr<ID3D12Resource> constBuff; // 定数バッファ
+	ComPtr<ID3D12Resource>constBuffB0; //定数バッファ
+	ComPtr<ID3D12Resource>constBuffB1; //定数バッファ
 	// 色
 	XMFLOAT4 color = { 1,1,1,1 };
 	// ローカルスケール

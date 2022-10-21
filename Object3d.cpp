@@ -695,24 +695,39 @@ bool Object3d::Initialize()
 	// ヒーププロパティ
 	CD3DX12_HEAP_PROPERTIES heapProps = CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_UPLOAD);
 	// リソース設定
-	CD3DX12_RESOURCE_DESC resourceDesc =
-		CD3DX12_RESOURCE_DESC::Buffer((sizeof(ConstBufferData) + 0xff) & ~0xff);
+	CD3DX12_RESOURCE_DESC resourceDescB0 =
+		CD3DX12_RESOURCE_DESC::Buffer((sizeof(ConstBufferDataB0) + 0xff) & ~0xff);
 
-	HRESULT result;
+	CD3DX12_RESOURCE_DESC resourceDescB1 =
+		CD3DX12_RESOURCE_DESC::Buffer((sizeof(ConstBufferDataB0) + 0xff) & ~0xff);
+
+	HRESULT resultB0, resultB1;
+
+	resourceDescB0 =
+		CD3DX12_RESOURCE_DESC::Buffer((sizeof(ConstBufferDataB0) + 0xff) & ~0xff);
+
+	resourceDescB1 =
+		CD3DX12_RESOURCE_DESC::Buffer((sizeof(ConstBufferDataB1) + 0xff) & ~0xff);
 
 	// 定数バッファの生成
-	result = device->CreateCommittedResource(
+	resultB0 = device->CreateCommittedResource(
 		&heapProps, // アップロード可能
-		D3D12_HEAP_FLAG_NONE, &resourceDesc, D3D12_RESOURCE_STATE_GENERIC_READ, nullptr,
-		IID_PPV_ARGS(&constBuff));
-	assert(SUCCEEDED(result));
+		D3D12_HEAP_FLAG_NONE, &resourceDescB0, D3D12_RESOURCE_STATE_GENERIC_READ, nullptr,
+		IID_PPV_ARGS(&constBuffB0));
+	assert(SUCCEEDED(resultB0));
+
+	resultB1 = device->CreateCommittedResource(
+		&heapProps, // アップロード可能
+		D3D12_HEAP_FLAG_NONE, &resourceDescB0, D3D12_RESOURCE_STATE_GENERIC_READ, nullptr,
+		IID_PPV_ARGS(&constBuffB0));
+	assert(SUCCEEDED(resultB1));
 
 	return true;
 }
 
 void Object3d::Update()
 {
-	HRESULT result;
+	HRESULT resultB0, resultB1;
 	XMMATRIX matScale, matRot, matTrans;
 
 	// スケール、回転、平行移動行列の計算
@@ -736,11 +751,13 @@ void Object3d::Update()
 	}
 
 	// 定数バッファへデータ転送
-	ConstBufferData* constMap = nullptr;
-	result = constBuff->Map(0, nullptr, (void**)&constMap);
-	constMap->color = color;
-	constMap->mat = matWorld * matView * matProjection;	// 行列の合成
-	constBuff->Unmap(0, nullptr);
+	ConstBufferDataB0* constMap0 = nullptr;
+	ConstBufferDataB1* constMap1 = nullptr;
+	resultB0 = constBuffB0->Map(0, nullptr, (void**)&constMap0);
+	resultB1 = constBuffB1->Map(0, nullptr, (void**)&constMap1);
+	constMap0->mat = matWorld * matView * matProjection;	// 行列の合成
+	constBuffB0->Unmap(0, nullptr);
+	constBuffB1->Unmap(0, nullptr);
 }
 
 void Object3d::Draw()
@@ -759,7 +776,7 @@ void Object3d::Draw()
 	cmdList->SetDescriptorHeaps(_countof(ppHeaps), ppHeaps);
 
 	// 定数バッファビューをセット
-	cmdList->SetGraphicsRootConstantBufferView(0, constBuff->GetGPUVirtualAddress());
+	cmdList->SetGraphicsRootConstantBufferView(0, constBuffB0->GetGPUVirtualAddress());
 	// シェーダリソースビューをセット
 	cmdList->SetGraphicsRootDescriptorTable(1, gpuDescHandleSRV);
 	// 描画コマンド
