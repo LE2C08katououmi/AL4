@@ -139,9 +139,11 @@ private: // 静的メンバ変数
 	// 頂点データ配列
 	/*static VertexPosNormalUv vertices[vertexCount];*/
 	static std::vector<VertexPosNormalUv> vertices;
+	static std::vector<VertexPosNormalUv> vertices1;
 	// 頂点インデックス配列
 	/*static unsigned short indices[planeCount * 3];*/
 	static std::vector<unsigned short> indices;
+	static std::vector<unsigned short> indices1;
 
 private:// 静的メンバ関数
 	/// <summary>
