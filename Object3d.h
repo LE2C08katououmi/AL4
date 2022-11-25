@@ -36,17 +36,16 @@ public: // サブクラス
 		XMMATRIX mat;	// ３Ｄ変換行列
 	};
 
-	//マテリアル
+	// マテリアル
 	struct Material
 	{
-		std::string name;			 //マテリアル名
-		XMFLOAT3 ambient;			 //アンビエント影響度
-		XMFLOAT3 diffuse;			 //ディフューズ影響度
-		XMFLOAT3 specular;			 //スペキュラー影響度
-		float alpha;				 //アルファ
-		std::string textureFliename; //テクスチャファイル名
-
-		//コンストラクタ
+		std::string name; // マテリアル名
+		XMFLOAT3 ambient; // アンビエント影響度
+		XMFLOAT3 diffuse; // ディフューズ影響度
+		XMFLOAT3 specular; // スペキュラー影響度
+		float alpha; // アルファ
+		std::string textureFilename; // テクスチャファイル名
+		// コンストラクタ
 		Material() 
 		{
 			ambient = { 0.3f,0.3f,0.3f };
@@ -54,24 +53,6 @@ public: // サブクラス
 			specular = { 0.0f,0.0f,0.0f };
 			alpha = 1.0f;
 		}
-	};
-
-	//定数バッファ用データ構造体B0
-	struct ConstBufferDataB0
-	{
-		//XMFLOAT4 color 色(RGBA)
-		XMMATRIX mat; //3D変換行列
-	};
-
-	// 定数バッファ用データ構造体B1
-	struct ConstBufferDataB1
-	{
-		XMFLOAT3 ambient; //アンビエント係数
-		float pad1;		  //パディング
-		XMFLOAT3 diffuse; //ディフューズ係数
-		float pad2;		  //パディング
-		XMFLOAT3 specular;//スペキュラー係数
-		float alpha;	  //アルファ
 	};
 
 private: // 定数
@@ -137,6 +118,11 @@ public: // 静的メンバ関数
 	/// <param name="move">移動量</param>
 	static void CameraMoveVector(XMFLOAT3 move);
 
+	/// <summary>
+	/// マテリアル読み込み
+	/// </summary>
+	static void LoadMaterial(const std::string& directoryPath, const std::string& filename);
+
 private: // 静的メンバ変数
 	// デバイス
 	static ID3D12Device* device;
@@ -170,18 +156,18 @@ private: // 静的メンバ変数
 	static XMFLOAT3 target;
 	// 上方向ベクトル
 	static XMFLOAT3 up;
-	// マテリアル
-	static Material material;
 	// 頂点バッファビュー
 	static D3D12_VERTEX_BUFFER_VIEW vbView;
 	// インデックスバッファビュー
 	static D3D12_INDEX_BUFFER_VIEW ibView;
 	// 頂点データ配列
-	//static VertexPosNormalUv vertices[vertexCount];
+	/*static VertexPosNormalUv vertices[vertexCount];*/
 	static std::vector<VertexPosNormalUv> vertices;
+	static std::vector<VertexPosNormalUv> vertices1;
 	// 頂点インデックス配列
-	//static unsigned short indices[planeCount * 3];
+	/*static unsigned short indices[planeCount * 3];*/
 	static std::vector<unsigned short> indices;
+	static std::vector<unsigned short> indices1;
 
 private:// 静的メンバ関数
 	/// <summary>
@@ -242,9 +228,10 @@ public: // メンバ関数
 	void SetPosition(const XMFLOAT3& position) { this->position = position; }
 
 private: // メンバ変数
-	//ComPtr<ID3D12Resource> constBuff; // 定数バッファ
-	ComPtr<ID3D12Resource>constBuffB0; //定数バッファ
-	ComPtr<ID3D12Resource>constBuffB1; //定数バッファ
+	// マテリアル
+	static Material material;
+	// 定数バッファ
+	ComPtr<ID3D12Resource> constBuff;
 	// 色
 	XMFLOAT4 color = { 1,1,1,1 };
 	// ローカルスケール
