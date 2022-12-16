@@ -29,11 +29,22 @@ public: // サブクラス
 		XMFLOAT2 uv;  // uv座標
 	};
 
-	// 定数バッファ用データ構造体
-	struct ConstBufferData
+	// 定数バッファ用データ構造体B0
+	struct ConstBufferDataB0
 	{
-		XMFLOAT4 color;	// 色 (RGBA)
+		//XMFLOAT4 color;	// 色 (RGBA)
 		XMMATRIX mat;	// ３Ｄ変換行列
+	};
+
+	// 定数バッファ用データ構造体B1
+	struct ConstBufferDataB1
+	{
+		XMFLOAT3 ambient; //アンビエント係数
+		float pad1;		  //パディング
+		XMFLOAT3 diffuse; //ディフューズ係数
+		float pad2;		  //パディング
+		XMFLOAT3 specular;//スペキュラー係数
+		float alpha;	  //アルファ
 	};
 
 	// マテリアル
@@ -122,7 +133,7 @@ public: // 静的メンバ関数
 	/// マテリアル読み込み
 	/// </summary>
 	static void LoadMaterial(const std::string& directoryPath, const std::string& filename);
-
+	
 private: // 静的メンバ変数
 	// デバイス
 	static ID3D12Device* device;
@@ -189,9 +200,10 @@ private:// 静的メンバ関数
 	static void InitializeGraphicsPipeline();
 
 	/// <summary>
-	/// テクスチャ読み込み
+	/// 
 	/// </summary>
-	static void LoadTexture();
+	/// <returns>成否</returns>
+	static bool LoadTexture(const std::string& directoryPath, const std::string& filename);
 
 	/// <summary>
 	/// モデル作成
@@ -231,7 +243,9 @@ private: // メンバ変数
 	// マテリアル
 	static Material material;
 	// 定数バッファ
-	ComPtr<ID3D12Resource> constBuff;
+	ComPtr<ID3D12Resource> constBuffB0;
+	// 定数バッファ
+	ComPtr<ID3D12Resource> constBuffB1;
 	// 色
 	XMFLOAT4 color = { 1,1,1,1 };
 	// ローカルスケール
