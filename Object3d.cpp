@@ -467,6 +467,7 @@ bool Object3d::LoadTexture(const std::string& directoryPath, const std::string& 
 		cpuDescHandleSRV
 	);
 
+	return true;
 }
 
 void Object3d::CreateModel()
@@ -741,13 +742,11 @@ bool Object3d::Initialize()
 		&heapProps, // アップロード可能
 		D3D12_HEAP_FLAG_NONE, &resourceDescB0, D3D12_RESOURCE_STATE_GENERIC_READ, nullptr,
 		IID_PPV_ARGS(&constBuffB0));
-	assert(SUCCEEDED(resultB0));
 
 	result = device->CreateCommittedResource(
 		&heapProps, // アップロード可能
 		D3D12_HEAP_FLAG_NONE, &resourceDescB1, D3D12_RESOURCE_STATE_GENERIC_READ, nullptr,
 		IID_PPV_ARGS(&constBuffB1));
-	assert(SUCCEEDED(resultB1));
 
 	return true;
 }
