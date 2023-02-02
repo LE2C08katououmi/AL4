@@ -39,7 +39,6 @@ Object3d::Material Object3d::material;
 //Object3d::VertexPosNormalUv Object3d::vertices[vertexCount];
 //unsigned short Object3d::indices[planeCount * 3];
 std::vector<Object3d::VertexPosNormalUv>Object3d::vertices;
-std::vector<unsigned short> Object3d::indices;
 
 void Object3d::StaticInitialize(ID3D12Device* device, int window_width, int window_height)
 {
@@ -60,6 +59,8 @@ void Object3d::StaticInitialize(ID3D12Device* device, int window_width, int wind
 	// モデル生成
 	CreateModel();
 
+	// モデルにデバイスをセット
+	Model::SetDevice(device);
 }
 
 void Object3d::PreDraw(ID3D12GraphicsCommandList* cmdList)
