@@ -1,22 +1,20 @@
 ﻿#include "WinApp.h"
 #include "DirectXCommon.h"
 #include "GameScene.h"
-#include "Object3d.h"
 
 // Windowsアプリでのエントリーポイント(main関数)
-int WINAPI WinMain(HINSTANCE,HINSTANCE,LPSTR,int)
+int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
 	// 汎用機能
 	WinApp* win = nullptr;
 	DirectXCommon* dxCommon = nullptr;
-	Input* input = nullptr;	
+	Input* input = nullptr;
 	GameScene* gameScene = nullptr;
-	Object3d* object3d = Object3d::Create();
 
 	// ゲームウィンドウの作成
 	win = WinApp::GetInstance();
 	win->CreateGameWindow();
-		
+
 	// DirectX初期化処理
 	dxCommon = DirectXCommon::GetInstance();
 	dxCommon->Initialize(win);
@@ -28,7 +26,7 @@ int WINAPI WinMain(HINSTANCE,HINSTANCE,LPSTR,int)
 
 	// スプライト静的初期化
 	Sprite::StaticInitialize(dxCommon->GetDevice(), WinApp::kWindowWidth, WinApp::kWindowHeight);
-	
+
 	// 3Dオブジェクト静的初期化
 	Object3d::StaticInitialize(dxCommon->GetDevice(), WinApp::kWindowWidth, WinApp::kWindowHeight);
 #pragma endregion
@@ -36,43 +34,31 @@ int WINAPI WinMain(HINSTANCE,HINSTANCE,LPSTR,int)
 	// ゲームシーンの初期化
 	gameScene = new GameScene();
 	gameScene->Initialize(dxCommon, input);
-	
+
 	// メインループ
 	while (true)
 	{
 		// メッセージ処理
-		if (win->ProcessMessage()) {	break; }
+		if (win->ProcessMessage()) { break; }
 
 		// 入力関連の毎フレーム処理
 		input->Update();
-
 		// ゲームシーンの毎フレーム処理
 		gameScene->Update();
 
-		// 3dオブジェクト更新
-		object3d->Update();
-
-
 		// 描画開始
 		dxCommon->PreDraw();
-
 		// ゲームシーンの描画
 		gameScene->Draw();
-
-		// 3dオブジェクト描画前処理
-		Object3d::PreDraw(dxCommon->GetCommandList());
-
-		// 3dオブジェクトの描画
-		object3d->Draw();
-
-		// 3dオブジェクト描画後処理
-		Object3d::PostDraw();
-
 		// 描画終了
 		dxCommon->PostDraw();
+
+		if (input->PushKey(DIK_ESCAPE))
+		{
+			break;
+		}
 	}
 	// 各種解放
-	delete object3d;
 	delete gameScene;
 	delete input;
 

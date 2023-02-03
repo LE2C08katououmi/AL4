@@ -1,15 +1,8 @@
 cbuffer cbuff0 : register(b0)
 {
+	float4 color; // 色(RGBA)
 	matrix mat; // ３Ｄ変換行列
 };
-
-cbuffer cbuff1:register(b1)
-{
-	float3 m_ambient:packoffset(c0);
-	float3 m_diffuse:packoffset(c1);
-	float3 m_specular:packoffset(c2);
-	float m_alpha : packoffset(c2.w);
-}
 
 // 頂点シェーダーからピクセルシェーダーへのやり取りに使用する構造体
 struct VSOutput

@@ -54,15 +54,15 @@ public: // メンバ関数
 private: // メンバ変数
 	DirectXCommon* dxCommon = nullptr;
 	Input* input = nullptr;
-	DebugText debugText;	
+	DebugText debugText;
 
 	/// <summary>
 	/// ゲームシーン用
 	/// </summary>
 	Sprite* spriteBG = nullptr;
-	Object3d* object3d = nullptr;
-
-	Sprite* sprite1 = nullptr;
-	Sprite* sprite2 = nullptr;
+	Model* model_ = nullptr;
+	Model* model2_ = nullptr;
+	Object3d* object3d_ = nullptr;
+	Object3d* object3d2_ = nullptr;
 };
 

@@ -47,28 +47,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="Resources\shaders\SpritePixelShader.hlsl">
-      <Filter>シェーダー ファイル</Filter>
-    </FxCompile>
-    <FxCompile Include="Resources\shaders\SpriteVertexShader.hlsl">
-      <Filter>シェーダー ファイル</Filter>
-    </FxCompile>
-    <FxCompile Include="Resources\shaders\ObjPS.hlsl">
-      <Filter>リソース ファイル</Filter>
-    </FxCompile>
-    <FxCompile Include="Resources\shaders\ObjVS.hlsl">
-      <Filter>リソース ファイル</Filter>
-    </FxCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\shaders\SpriteShaderHeader.hlsli">
-      <Filter>シェーダー ファイル</Filter>
-    </None>
-    <None Include="Resources\shaders\Obj.hlsli">
-      <Filter>リソース ファイル</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="Sprite.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -93,5 +71,36 @@
     <ClInclude Include="Model.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Resources\shaders\BasicPixelShader.hlsl">
+      <Filter>シェーダー ファイル</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\BasicVertexShader.hlsl">
+      <Filter>シェーダー ファイル</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\SpritePixelShader.hlsl">
+      <Filter>シェーダー ファイル</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\SpriteVertexShader.hlsl">
+      <Filter>シェーダー ファイル</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\..\..\..\Downloads\AL4_DirectXGame-02_03\AL4_DirectXGame-02_03\OBJPixelShader.hlsl">
+      <Filter>リソース ファイル</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\..\..\..\Downloads\AL4_DirectXGame-02_03\AL4_DirectXGame-02_03\OBJVertexShader.hlsl">
+      <Filter>リソース ファイル</Filter>
+    </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\shaders\BasicShaderHeader.hlsli">
+      <Filter>シェーダー ファイル</Filter>
+    </None>
+    <None Include="Resources\shaders\SpriteShaderHeader.hlsli">
+      <Filter>シェーダー ファイル</Filter>
+    </None>
+    <None Include="..\..\..\..\..\Downloads\AL4_DirectXGame-02_03\AL4_DirectXGame-02_03\OBJShaderHeader.hlsli">
+      <Filter>リソース ファイル</Filter>
+    </None>
   </ItemGroup>
 </Project>
