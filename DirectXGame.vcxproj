@@ -110,27 +110,21 @@
     <ClInclude Include="WinApp.h" />
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="..\..\..\..\..\Downloads\AL4_DirectXGame-02_03\AL4_DirectXGame-02_03\OBJPixelShader.hlsl">
+    <None Include="Resources\shaders\Obj.hlsli" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Resources\shaders\ObjPS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
-    <FxCompile Include="..\..\..\..\..\Downloads\AL4_DirectXGame-02_03\AL4_DirectXGame-02_03\OBJVertexShader.hlsl">
+    <FxCompile Include="Resources\shaders\ObjVS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
-    <FxCompile Include="Resources\shaders\BasicPixelShader.hlsl" />
-    <FxCompile Include="Resources\shaders\BasicVertexShader.hlsl" />
-    <FxCompile Include="Resources\shaders\SpritePixelShader.hlsl" />
-    <FxCompile Include="Resources\shaders\SpriteVertexShader.hlsl" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\..\..\..\Downloads\AL4_DirectXGame-02_03\AL4_DirectXGame-02_03\OBJShaderHeader.hlsli" />
-    <None Include="Resources\shaders\BasicShaderHeader.hlsli" />
-    <None Include="Resources\shaders\SpriteShaderHeader.hlsli" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
