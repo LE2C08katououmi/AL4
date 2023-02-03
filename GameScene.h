@@ -6,6 +6,7 @@
 #include "Sprite.h"
 #include "Object3d.h"
 #include "DebugText.h"
+#include "CollisionPrimitive.h"
 
 /// <summary>
 /// ゲームシーン
@@ -62,7 +63,11 @@ private: // メンバ変数
 	Sprite* spriteBG = nullptr;
 	Model* model_ = nullptr;
 	Model* model2_ = nullptr;
+	Model* model3_ = nullptr;
 	Object3d* object3d_ = nullptr;
 	Object3d* object3d2_ = nullptr;
+	Object3d* object3d3_ = nullptr;
+	Sphere sphere;
+	Plane plane;
 };
 

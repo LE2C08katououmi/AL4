@@ -89,6 +89,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Collision.cpp" />
     <ClCompile Include="DebugText.cpp" />
     <ClCompile Include="DirectXCommon.cpp" />
     <ClCompile Include="GameScene.cpp" />
@@ -100,6 +101,7 @@
     <ClCompile Include="WinApp.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Collision.h" />
     <ClInclude Include="DebugText.h" />
     <ClInclude Include="DirectXCommon.h" />
     <ClInclude Include="GameScene.h" />
@@ -108,6 +110,7 @@
     <ClInclude Include="Object3d.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="WinApp.h" />
+    <ClInclude Include="CollisionPrimitive.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\Obj.hlsli" />
